@@ -1,0 +1,29 @@
+# Runs locally on every commit. Mirrors CI so failures are caught early.
+# Install once: `pip install pre-commit && pre-commit install`
+# Run on all files: `pre-commit run --all-files`
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: detect-private-key
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+        files: ^backend/
+      - id: ruff-format
+        files: ^backend/
+
+  # NOTE: mypy is not run as a pre-commit hook because pre-commit uses an
+  # isolated venv that wouldn't see all our runtime deps (FastAPI, SQLAlchemy,
+  # structlog, redis, jwt, argon2). Run it explicitly with `make typecheck`
+  # before pushing, and in CI. Pre-commit should be fast and stateless.

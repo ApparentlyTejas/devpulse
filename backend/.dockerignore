@@ -1,0 +1,21 @@
+# Keep the build context tiny. Less to send to the daemon, faster builds,
+# smaller chance of leaking secrets.
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.coverage*
+htmlcov
+tests
+docs
+*.md
+!README.md
+.DS_Store
+Thumbs.db

@@ -1,0 +1,65 @@
+# ---- Secrets & local config ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.egg-info/
+dist/
+build/
+.tox/
+
+# ---- Node / Frontend ----
+node_modules/
+.pnpm-store/
+.next/
+.vite/
+dist/
+build/
+*.tsbuildinfo
+
+# ---- Editors & OS ----
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ---- Docker / runtime data ----
+.docker/
+postgres-data/
+redis-data/
+
+# ---- Logs ----
+*.log
+logs/
+
+# ---- Terraform ----
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+
+# ---- AI / local caches ----
+.claude/

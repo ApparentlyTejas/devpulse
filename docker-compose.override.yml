@@ -1,0 +1,30 @@
+# =============================================================================
+# Local-dev overrides. Merged automatically by `docker compose` if present.
+# Do not put production-only or sensitive settings here.
+# =============================================================================
+
+services:
+  api:
+    # Bind-mount source so code changes are picked up by --reload.
+    volumes:
+      - ./backend/app:/app/app:cached
+      - ./backend/alembic:/app/alembic:cached
+      # NOTE: alembic.ini is baked into the image via the Dockerfile.
+      # We deliberately don't bind-mount it: file bind mounts to a
+      # non-existent host path silently create a directory on the host,
+      # which broke us once. Rebuild the image when alembic.ini changes
+      # (rare — it's pure config).
+    # Override CMD to enable uvicorn auto-reload.
+    command:
+      - uvicorn
+      - app.main:app
+      - --host
+      - "0.0.0.0"
+      - --port
+      - "8000"
+      - --reload
+      - --reload-dir
+      - /app/app
+    environment:
+      APP_DEBUG: "true"
+      APP_LOG_LEVEL: "DEBUG"
